@@ -40,19 +40,19 @@ contract MasterChef is Ownable {
     // Info of each pool.
     struct PoolInfo {
         IBEP20 lpToken;           // Address of LP token contract.
-        uint256 allocPoint;       // How many allocation points assigned to this pool. BBFs to distribute per block.
-        uint256 lastRewardBlock;  // Last block number that BBFs distribution occurs.
-        uint256 accBBFPerShare;   // Accumulated BBFs per share, times 1e12. See below.
+        uint256 allocPoint;       // How many allocation points assigned to this pool. BUZZs to distribute per block.
+        uint256 lastRewardBlock;  // Last block number that BUZZs distribution occurs.
+        uint256 accBUZZPerShare;   // Accumulated BUZZs per share, times 1e12. See below.
         uint16 depositFeeBP;      // Deposit fee in basis points
     }
 
-    // The BBF TOKEN!
-    BBFToken public BBF;
+    // The BUZZ TOKEN!
+    BUZZToken public BUZZ;
     // Dev address.
     address public devaddr;
-    // BBF tokens created per block.
-    uint256 public BBFPerBlock;
-    // Bonus muliplier for early BBF makers.
+    // BUZZ tokens created per block.
+    uint256 public BUZZPerBlock;
+    // Bonus muliplier for early BUZZ makers.
     uint256 public constant BONUS_MULTIPLIER = 1;
     // Deposit Fee address
     address public feeAddress;
@@ -63,7 +63,7 @@ contract MasterChef is Ownable {
     mapping (uint256 => mapping (address => UserInfo)) public userInfo;
     // Total allocation points. Must be the sum of all allocation points in all pools.
     uint256 public totalAllocPoint = 0;
-    // The block number when BBF mining starts.
+    // The block number when BUZZ mining starts.
     uint256 public startBlock;
 
     event Deposit(address indexed user, uint256 indexed pid, uint256 amount);
@@ -106,7 +106,7 @@ contract MasterChef is Ownable {
         }));
     }
 
-    // Update the given pool's BBF allocation point and deposit fee. Can only be called by the owner.
+    // Update the given pool's BUZZ allocation point and deposit fee. Can only be called by the owner.
     function set(uint256 _pid, uint256 _allocPoint, uint16 _depositFeeBP, bool _withUpdate) public onlyOwner {
         require(_depositFeeBP <= 10000, "set: invalid deposit fee basis points");
         if (_withUpdate) {
@@ -122,7 +122,7 @@ contract MasterChef is Ownable {
         return _to.sub(_from).mul(BONUS_MULTIPLIER);
     }
 
-    // View function to see pending BBFs on frontend.
+    // View function to see pending BUZZs on frontend.
     function pendingEgg(uint256 _pid, address _user) external view returns (uint256) {
         PoolInfo storage pool = poolInfo[_pid];
         UserInfo storage user = userInfo[_pid][_user];
