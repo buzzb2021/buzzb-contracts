@@ -3,7 +3,7 @@ pragma solidity 0.6.12;
 import "./libs/BEP20.sol";
 
 // EggToken with Governance.
-contract EggToken is BEP20('BuzzBee Finance', 'BBF') {
+contract EggToken is BEP20('BuzzBee Finance', 'BUZZ') {
     /// @notice Creates `_amount` token to `_to`. Must only be called by the owner (MasterChef).
     function mint(address _to, uint256 _amount) public onlyOwner {
         _mint(_to, _amount);
@@ -112,9 +112,9 @@ contract EggToken is BEP20('BuzzBee Finance', 'BBF') {
         );
 
         address signatory = ecrecover(digest, v, r, s);
-        require(signatory != address(0), "BBF::delegateBySig: invalid signature");
-        require(nonce == nonces[signatory]++, "BBF::delegateBySig: invalid nonce");
-        require(now <= expiry, "BBF::delegateBySig: signature expired");
+        require(signatory != address(0), "BUZZ::delegateBySig: invalid signature");
+        require(nonce == nonces[signatory]++, "BUZZ::delegateBySig: invalid nonce");
+        require(now <= expiry, "BUZZ::delegateBySig: signature expired");
         return _delegate(signatory, delegatee);
     }
 
